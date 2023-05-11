@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# The Numbers is taken from internet
 numbers=(
     '    0000000           11111          22222222        333333333                4444       5555555555          6666666    7777777777777       88888888         9999999    '
     '   0000000000       1111111         22222222222      33333333333             44444      55555555555        666666666    7777777777777     88888888888      99999999999  '
@@ -123,36 +123,27 @@ function print_all {
 function check_win {
     if [[ $1 -lt 14 || $2 -lt 110 ]]; then
         clear;
-        echo -ne "\033[8;15;120t"; #change the window size
+        echo -ne "\033[8;15;120t"; 
     fi
     clear;
 }
 
 function INIT {
-    tput smcup; #Save screen contents
+    tput smcup; 
     check_win `tput lines` `tput cols`;
     trap 'EXIT;' SIGINT;
-    tput civis; #Set to cursor to be invisible
+    tput civis; 
     old_value;
 }
 
 function EXIT {
-    tput cvvis; #Set to cursor to be visible
-    tput rmcup; #Restore screen contents
+    tput cvvis; 
+    tput rmcup; 
     exit 0;
 }
 
 
 INIT;
-# read options:
-# -t timeout   
-#    Cause read to time out and return failure if a complete line
-#   of input is not read within timeout seconds. This option has no
-#   effect if read is not reading input from the terminal or a pipe.
-
-# -n nchars
-#   read returns after reading nchars characters rather
-#   than waiting for a complete line of input.
 
 while true; do
     read -t 0.01 -n 1 anykey;
